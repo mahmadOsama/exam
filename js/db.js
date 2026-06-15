@@ -2,22 +2,10 @@
    DATABASE OPERATIONS & SUPABASE CONFIG
    ===================================== */
 
-let SUPABASE_URL;
-let SUPABASE_ANON_KEY;
-
-// Supabase client-side config comes from config.example.js.
-// It must exist on GitHub Pages; otherwise the app cannot connect.
-{
-    const mod = await import('../config.example.js');
-    SUPABASE_URL = mod.SUPABASE_URL;
-    SUPABASE_ANON_KEY = mod.SUPABASE_ANON_KEY;
-}
-
-
-
-
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config.example.js';
 
 export const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
 
 
