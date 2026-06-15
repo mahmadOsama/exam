@@ -38,7 +38,9 @@ export async function initAuth() {
 /* ===== LOGIN HANDLER ===== */
 async function handleLogin(e) {
     e.preventDefault();
+    e.stopPropagation();
 
+    console.log('🔐 handleLogin fired');
     const username = usernameInput?.value?.trim() || '';
     const password = passwordInput?.value?.trim() || '';
 
@@ -82,6 +84,7 @@ async function handleLogin(e) {
         console.log('🧾 Login query result:', { student, hasError: !!error });
 
         if (error || !student) {
+            console.warn('⛔ Login failed -> staying on login-screen');
             showNotification('❌ Invalid username or password', 'error');
             passwordInput.value = '';
             return;
