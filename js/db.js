@@ -5,17 +5,14 @@
 let SUPABASE_URL;
 let SUPABASE_ANON_KEY;
 
-try {
-    // Prefer local config.js (ignored by git)
-    const mod = await import('../config.js');
-    SUPABASE_URL = mod.SUPABASE_URL;
-    SUPABASE_ANON_KEY = mod.SUPABASE_ANON_KEY;
-} catch (e) {
-    // Fallback for GitHub Pages when config.js is not present
+// Always load the example config so GitHub Pages never requests ./config.js
+// (Pages may log 404 if config.js is missing; this prevents it.)
+{
     const mod = await import('../config.example.js');
     SUPABASE_URL = mod.SUPABASE_URL;
     SUPABASE_ANON_KEY = mod.SUPABASE_ANON_KEY;
 }
+
 
 // Debug (remove later)
 console.log(SUPABASE_URL);
