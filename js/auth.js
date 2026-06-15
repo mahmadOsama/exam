@@ -75,6 +75,12 @@ async function handleLogin(e) {
             .eq('is_active', true)
             .maybeSingle();
 
+        // Extra debug (Pages-safe) - helps identify the exact failure
+        if (error) {
+            console.error('❌ Login query error:', error);
+        }
+        console.log('🧾 Login query result:', { student, hasError: !!error });
+
         if (error || !student) {
             showNotification('❌ Invalid username or password', 'error');
             passwordInput.value = '';
