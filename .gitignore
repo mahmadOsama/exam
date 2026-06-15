@@ -1,0 +1,15 @@
+# Node / build
+node_modules/
+dist/
+build/
+
+# OS / editor
+.DS_Store
+.vscode/
+
+# Supabase keys (client config)
+config.js
+config.local.js
+secrets.js
+.env*
+

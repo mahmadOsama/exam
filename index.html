@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3b82f6">
+    <title>نظام إدارة الامتحانات المتقدم</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/student.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Notifications Container -->
+    <div id="notification-container"></div>
+
+    <!-- ===== LOGIN SCREEN ===== -->
+    <div id="login-screen" class="screen active">
+        <div class="login-wrapper">
+            <div class="login-card">
+                <div class="login-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>نظام الامتحانات</h1>
+                    <p>إدارة متقدمة للاختبارات</p>
+                </div>
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label>👤 اسم المستخدم</label>
+                        <input type="text" id="username-input" placeholder="أدخل اسمك" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔐 كلمة المرور</label>
+                        <input type="password" id="password-input" placeholder="أدخل كلمة المرور" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>تسجيل الدخول</span>
+                        <i class="fas fa-spinner fa-spin" style="display:none;"></i>
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    <p>🔒 نظام آمن وموثوق</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN SCREEN ===== -->
+    <div id="admin-screen" class="screen">
+        <div class="admin-wrapper">
+            <!-- Sidebar -->
+            <nav class="admin-sidebar">
+                <div class="sidebar-header">
+                    <i class="fas fa-bars"></i>
+                    <h2>لوحة التحكم</h2>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li class="active" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>📊 لوحة المعلومات</span>
+                    </li>
+                    <li data-section="exams">
+                        <i class="fas fa-file-alt"></i>
+                        <span>📚 الامتحانات</span>
+                    </li>
+                    <li data-section="students">
+                        <i class="fas fa-users"></i>
+                        <span>👥 الطلاب</span>
+                    </li>
+                    <li data-section="monitoring">
+                        <i class="fas fa-eye"></i>
+                        <span>👁️ المراقبة</span>
+                    </li>
+                    <li data-section="grades">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>📊 العلامات</span>
+                    </li>
+                    <li data-section="analytics">
+                        <i class="fas fa-analytics"></i>
+                        <span>📈 التحليلات</span>
+                    </li>
+                </ul>
+
+                <div class="sidebar-footer">
+                    <button id="logout-btn" class="btn btn-danger-outlined">
+                        <i class="fas fa-sign-out-alt"></i> خروج
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="admin-main">
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="admin-section active">
+                    <h2>📊 لوحة المعلومات</h2>
+                    <div id="dashboard-content"></div>
+                </section>
+
+                <!-- Exams Section -->
+                <section id="exams-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>📚 الامتحانات</h2>
+                        <button id="new-exam-btn" class="btn btn-success">
+                            <i class="fas fa-plus"></i> امتحان جديد
+                        </button>
+                    </div>
+                    <div id="exams-content"></div>
+                </section>
+
+                <!-- Students Section -->
+                <section id="students-section" class="admin-section">
+                    <div class="section-header">
+                        <h2>👥 الطلاب</h2>
+                        <button id="new-student-btn" class="btn btn-success">
+                            <i class="fas fa-user-plus"></i> طالب جديد
+                        </button>
+                    </div>
+                    <div id="students-content"></div>
+                </section>
+
+                <!-- Monitoring Section -->
+                <section id="monitoring-section" class="admin-section">
+                    <h2>👁️ المراقبة المباشرة</h2>
+                    <div id="monitoring-content"></div>
+                </section>
+
+                <!-- Grades Section -->
+                <section id="grades-section" class="admin-section">
+                    <h2>📊 العلامات والتصحيح</h2>
+                    <div id="grades-content"></div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics-section" class="admin-section">
+                    <h2>📈 التحليلات والإحصائيات</h2>
+                    <div id="analytics-content"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- ===== STUDENT SCREEN ===== -->
+    <div id="student-screen" class="screen">
+        <header class="student-header">
+            <h2>👋 مرحباً، <span id="student-name"></span></h2>
+            <button id="student-logout-btn" class="btn btn-danger-outlined">خروج</button>
+        </header>
+
+        <main class="student-main">
+            <!-- Dashboard -->
+            <section id="student-dashboard" class="student-section active">
+                <div id="student-dashboard-content"></div>
+            </section>
+
+            <!-- Exam Taker -->
+            <section id="exam-taker" class="student-section">
+                <div id="exam-content"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div id="modal-content" class="modal-box"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

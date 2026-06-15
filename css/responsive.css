@@ -1,0 +1,910 @@
+/* =====================================
+   RESPONSIVE DESIGN FIXES
+   ===================================== */
+
+/* ===== LARGE DESKTOP (1440px+) ===== */
+@media (min-width: 1440px) {
+    .admin-main {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .student-main {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .data-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ===== DESKTOP (1024px - 1439px) ===== */
+@media (max-width: 1439px) {
+    .admin-sidebar {
+        width: 240px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .data-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== TABLET LANDSCAPE (768px - 1023px) ===== */
+@media (max-width: 1023px) {
+    .admin-sidebar {
+        width: 200px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 16px;
+    }
+
+    .sidebar-menu li {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    .sidebar-menu li i {
+        font-size: 16px;
+    }
+
+    .admin-main {
+        padding: 20px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .section-header h2 {
+        font-size: 22px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .data-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-value {
+        font-size: 28px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-box {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .stepper {
+        gap: 8px;
+    }
+
+    .step-label {
+        font-size: 11px;
+    }
+
+    .subjects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .exam-container {
+        padding: 20px;
+    }
+
+    .exam-progress-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+}
+
+/* ===== TABLET PORTRAIT (600px - 767px) ===== */
+@media (max-width: 767px) {
+    /* Admin Layout */
+    .admin-wrapper {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        z-index: 300;
+        transition: left 0.3s ease;
+        box-shadow: var(--shadow-xl);
+    }
+
+    .admin-sidebar.open {
+        left: 0;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 299;
+        display: none;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .admin-main {
+        padding: 15px;
+        width: 100%;
+    }
+
+    /* Add hamburger menu button */
+    .menu-toggle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 301;
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .section-header {
+        margin-top: 50px;
+    }
+
+    .section-header h2 {
+        font-size: 20px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card h3 {
+        font-size: 15px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .card-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Student Layout */
+    .student-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .student-header h2 {
+        font-size: 18px;
+    }
+
+    .student-main {
+        padding: 15px;
+    }
+
+    .subjects-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .subject-card {
+        padding: 25px 20px;
+    }
+
+    .subject-card i {
+        font-size: 35px;
+    }
+
+    .subject-card h3 {
+        font-size: 16px;
+    }
+
+    /* Exam Interface */
+    .exam-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .exam-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .exam-info h2 {
+        font-size: 16px;
+    }
+
+    .timer {
+        font-size: 20px;
+        padding: 8px 14px;
+        min-width: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    .exam-container {
+        padding: 15px;
+    }
+
+    .question-card {
+        padding: 18px;
+    }
+
+    .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .question-text {
+        font-size: 16px;
+    }
+
+    .option-label {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .exam-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .exam-navigation .btn {
+        width: 100%;
+    }
+
+    .exam-progress {
+        padding: 15px;
+    }
+
+    .exam-progress-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .progress-stat {
+        padding: 12px;
+    }
+
+    .progress-stat-value {
+        font-size: 18px;
+    }
+
+    .progress-stat-label {
+        font-size: 11px;
+    }
+
+    .question-nav-panel {
+        padding: 15px;
+    }
+
+    .question-nav-grid {
+        grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+        gap: 6px;
+    }
+
+    .question-nav-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 11px;
+    }
+
+    /* Modal */
+    .modal-box {
+        width: 95%;
+        padding: 20px;
+        max-height: 85vh;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+    }
+
+    .wizard-form {
+        gap: 15px;
+    }
+
+    .stepper {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .step {
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .step-label {
+        font-size: 10px;
+    }
+
+    /* Tables */
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 10px 12px;
+    }
+
+    /* Forms */
+    .form-group label {
+        font-size: 12px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 11px 13px;
+        font-size: 14px;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 11px 20px;
+        font-size: 13px;
+    }
+
+    .btn-sm {
+        padding: 7px 14px;
+        font-size: 12px;
+    }
+
+    .btn i {
+        font-size: 13px;
+    }
+
+    /* Notifications */
+    #notification-container {
+        right: 10px;
+        left: 10px;
+        top: 15px;
+        max-width: none;
+    }
+
+    .notification {
+        min-width: auto;
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    /* Exams List */
+    .exams-list {
+        gap: 12px;
+    }
+
+    .exam-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .exam-item-action {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .exam-item-action .btn {
+        width: 100%;
+    }
+}
+
+/* ===== MOBILE (480px - 599px) ===== */
+@media (max-width: 599px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .login-header i {
+        font-size: 40px;
+    }
+
+    .login-header h1 {
+        font-size: 24px;
+    }
+
+    .login-header p {
+        font-size: 12px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .btn-full {
+        padding: 13px;
+    }
+
+    .admin-main {
+        padding: 12px;
+    }
+
+    .section-header h2 {
+        font-size: 18px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-label {
+        font-size: 10px;
+    }
+
+    .stat-value {
+        font-size: 22px;
+    }
+
+    .stat-change {
+        font-size: 11px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .card h3 {
+        font-size: 14px;
+    }
+
+    .card p {
+        font-size: 11px;
+    }
+
+    .badge {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    .student-header h2 {
+        font-size: 16px;
+    }
+
+    .student-main {
+        padding: 12px;
+    }
+
+    .student-dashboard-card {
+        padding: 20px;
+    }
+
+    .student-dashboard-card h3 {
+        font-size: 16px;
+    }
+
+    .subjects-grid {
+        gap: 12px;
+    }
+
+    .subject-card {
+        padding: 20px 15px;
+    }
+
+    .subject-card i {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .subject-card h3 {
+        font-size: 15px;
+    }
+
+    .subject-card-status {
+        font-size: 11px;
+    }
+
+    .exam-container {
+        padding: 12px;
+    }
+
+    .question-card {
+        padding: 15px;
+    }
+
+    .question-text {
+        font-size: 15px;
+    }
+
+    .option-label {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .option-label input {
+        width: 16px;
+        height: 16px;
+    }
+
+    .timer {
+        font-size: 18px;
+        padding: 7px 12px;
+    }
+
+    .exam-progress {
+        padding: 12px;
+    }
+
+    .exam-progress-title {
+        font-size: 13px;
+    }
+
+    .exam-progress-stats {
+        gap: 6px;
+    }
+
+    .progress-stat {
+        padding: 10px;
+    }
+
+    .progress-stat-value {
+        font-size: 16px;
+    }
+
+    .progress-stat-label {
+        font-size: 10px;
+    }
+
+    .question-nav-grid {
+        grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+        gap: 5px;
+    }
+
+    .question-nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 10px;
+    }
+
+    .modal-box {
+        padding: 18px;
+    }
+
+    .modal-header {
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+    }
+
+    .modal-header h2 {
+        font-size: 16px;
+    }
+
+    .wizard-form {
+        gap: 12px;
+    }
+
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+
+    .step-label {
+        font-size: 9px;
+    }
+
+    .btn {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+
+    .notification {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .notification i {
+        font-size: 16px;
+    }
+
+    .empty-state {
+        padding: 40px 15px;
+    }
+
+    .empty-state-icon {
+        font-size: 36px;
+    }
+
+    .empty-state-title {
+        font-size: 16px;
+    }
+
+    .empty-state-text {
+        font-size: 12px;
+    }
+}
+
+/* ===== SMALL MOBILE (max 479px) ===== */
+@media (max-width: 479px) {
+    .login-card {
+        padding: 25px 18px;
+    }
+
+    .login-header i {
+        font-size: 36px;
+        margin-bottom: 12px;
+    }
+
+    .login-header h1 {
+        font-size: 20px;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+    }
+
+    .section-header h2 {
+        font-size: 16px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    .card h3 {
+        font-size: 13px;
+    }
+
+    .subjects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .subject-card i {
+        font-size: 28px;
+    }
+
+    .subject-card h3 {
+        font-size: 14px;
+    }
+
+    .question-text {
+        font-size: 14px;
+    }
+
+    .option-label {
+        font-size: 11px;
+        padding: 9px 11px;
+    }
+
+    .exam-progress-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .question-nav-grid {
+        grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+    }
+
+    .question-nav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 9px;
+    }
+
+    .modal-box {
+        padding: 15px;
+    }
+
+    .stepper::before {
+        display: none;
+    }
+
+    .step {
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+}
+
+/* ===== LANDSCAPE MODE (Mobile/Tablet) ===== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .exam-header {
+        padding: 10px 20px;
+    }
+
+    .exam-container {
+        padding: 15px;
+    }
+
+    .question-card {
+        padding: 15px;
+    }
+
+    .exam-progress {
+        padding: 12px;
+    }
+
+    .question-nav-panel {
+        padding: 12px;
+    }
+
+    .modal-box {
+        max-height: 95vh;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .admin-sidebar,
+    .sidebar,
+    .student-header,
+    .exam-header,
+    .exam-navigation,
+    .question-nav-panel,
+    .btn,
+    #notification-container,
+    .modal-overlay {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+    }
+
+    .card,
+    .question-card {
+        box-shadow: none;
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+
+    .admin-main,
+    .student-main,
+    .exam-container {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid currentColor;
+    }
+
+    .card {
+        border: 2px solid var(--border-dark);
+    }
+
+    input, select, textarea {
+        border: 2px solid var(--text-dark);
+    }
+}
+
+/* ===== UTILITY CLASSES FOR RESPONSIVE ===== */
+.hide-mobile {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .hide-mobile {
+        display: none;
+    }
+}
+
+.show-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .show-mobile {
+        display: block;
+    }
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+    .container-fluid {
+        padding: 0 30px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-fluid {
+        padding: 0 40px;
+    }
+}
