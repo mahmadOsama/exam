@@ -2,12 +2,27 @@
    DATABASE OPERATIONS & SUPABASE CONFIG
    ===================================== */
 
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config.js';
+let SUPABASE_URL;
+let SUPABASE_ANON_KEY;
 
+try {
+    // Prefer local config.js (ignored by git)
+    const mod = await import('../config.js');
+    SUPABASE_URL = mod.SUPABASE_URL;
+    SUPABASE_ANON_KEY = mod.SUPABASE_ANON_KEY;
+} catch (e) {
+    // Fallback for GitHub Pages when config.js is not present
+    const mod = await import('../config.example.js');
+    SUPABASE_URL = mod.SUPABASE_URL;
+    SUPABASE_ANON_KEY = mod.SUPABASE_ANON_KEY;
+}
+
+// Debug (remove later)
 console.log(SUPABASE_URL);
 console.log(SUPABASE_ANON_KEY);
 
 export const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
 
 /* ===== EXAMS ===== */
