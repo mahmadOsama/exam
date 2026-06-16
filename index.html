@@ -5,266 +5,338 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#3b82f6">
     <title>نظام إدارة الامتحانات المتقدم</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Architecture -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/student.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/advanced-upgrade.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Notifications Container -->
-    <div id="notification-container"></div>
+    <!-- ═══════════════════════════════════════
+         NOTIFICATIONS
+    ═══════════════════════════════════════ -->
+    <div id="notification-container" role="region" aria-label="الإشعارات" aria-live="polite"></div>
 
-    <!-- ===== EXAM APP (replaces old static screens) ===== -->
-    <div id="app">
+    <!-- ═══════════════════════════════════════
+         LOGIN SCREEN
+    ═══════════════════════════════════════ -->
+    <div id="login-screen" class="screen active" role="main">
+        <div class="login-wrapper">
+            <div class="login-card">
 
-        <!-- ===== LOGIN SCREEN ===== -->
-        <div id="login-screen" class="screen active">
-            <div class="login-wrapper">
-                <div class="login-card">
-                    <div class="login-header">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h1>نظام الامتحانات</h1>
-                        <p>إدارة متقدمة للاختبارات</p>
-                    </div>
-
-                    <form id="login-form">
-                        <div class="form-group">
-                            <label>👤 اسم المستخدم</label>
-                            <input type="text" id="username-input" placeholder="أدخل اسمك" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>🔐 كلمة المرور</label>
-                            <input type="password" id="password-input" placeholder="أدخل كلمة المرور" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <span>تسجيل الدخول</span>
-                            <i class="fas fa-spinner fa-spin" style="display:none;"></i>
-                        </button>
-                    </form>
-
-                    <div class="login-footer">
-                        <p>🔒 نظام آمن وموثوق</p>
-                    </div>
+                <div class="login-header">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <h1>نظام الامتحانات</h1>
+                    <p>منصة إدارة الاختبارات المتقدمة</p>
                 </div>
-            </div>
-        </div>
 
-        <!-- ===== TOP BAR (from new.html feature) ===== -->
-        <header class="topbar" id="examos-topbar" style="display:none;">
-            <div class="topbar-logo">
-                <div class="topbar-logo-icon">E</div>
-                ExamOS
-            </div>
+                <form id="login-form" novalidate>
+                    <div class="form-group">
+                        <label for="username-input">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            اسم المستخدم
+                        </label>
+                        <input
+                            type="text"
+                            id="username-input"
+                            name="username"
+                            placeholder="أدخل اسم المستخدم"
+                            autocomplete="username"
+                            required
+                            autofocus
+                        >
+                    </div>
 
-            <div class="topbar-divider"></div>
+                    <div class="form-group">
+                        <label for="password-input">
+                            <i class="fas fa-lock" aria-hidden="true"></i>
+                            كلمة المرور
+                        </label>
+                        <input
+                            type="password"
+                            id="password-input"
+                            name="password"
+                            placeholder="أدخل كلمة المرور"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
 
-            <nav class="topbar-nav">
-                <button class="topbar-tab active" onclick="switchView('teacher')" id="tab-teacher">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="2" y="3" width="12" height="9" rx="1.5"/><path d="M5 14h6M8 12v2"/>
-                    </svg>
-                    <span>Teacher Workspace</span>
-                </button>
-                <button class="topbar-tab" onclick="switchView('student')" id="tab-student">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.314 2.686-5 6-5s6 1.686 6 5"/>
-                    </svg>
-                    <span>Student View</span>
-                </button>
-                <button class="topbar-tab" onclick="switchView('results')" id="tab-results">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M2 12l4-4 3 3 5-7"/><circle cx="14" cy="4" r="1.5"/>
-                    </svg>
-                    <span>Analytics</span>
-                </button>
-            </nav>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                        <span>تسجيل الدخول</span>
+                        <i class="fas fa-spinner fa-spin" style="display:none;" aria-hidden="true"></i>
+                    </button>
+                </form>
 
-            <div class="topbar-right">
-                <div class="save-indicator">
-                    <div class="save-dot"></div>
-                    Saved 2s ago
+                <div class="login-footer">
+                    <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                    نظام آمن ومشفر
                 </div>
-                <div class="topbar-divider"></div>
 
-                <button class="btn-icon tooltip-wrap" type="button">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
-                    <div class="tooltip">Exam history</div>
-                </button>
-
-                <button class="btn-icon tooltip-wrap" type="button">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg>
-                    <div class="tooltip">Invite collaborator</div>
-                </button>
-
-                <button class="btn-ai" type="button">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5"/><path d="M6 8l1.5 1.5L10 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    AI Assistant
-                </button>
-
-                <button class="btn-publish" type="button">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9M4 7l4-5 4 5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 14h12"/></svg>
-                    Publish
-                </button>
-
-                <div class="topbar-divider"></div>
-                <div class="avatar">MA</div>
-            </div>
-        </header>
-
-        <!-- ===== TEACHER / ADMIN (existing) ===== -->
-        <div id="admin-screen" class="screen">
-            <div class="admin-wrapper">
-                <!-- Sidebar -->
-                <nav class="admin-sidebar">
-                    <div class="sidebar-header">
-                        <i class="fas fa-bars"></i>
-                        <h2>لوحة التحكم</h2>
-                    </div>
-
-                    <ul class="sidebar-menu">
-                        <li class="active" data-section="dashboard">
-                            <i class="fas fa-chart-line"></i>
-                            <span>📊 لوحة المعلومات</span>
-                        </li>
-                        <li data-section="exams">
-                            <i class="fas fa-file-alt"></i>
-                            <span>📚 الامتحانات</span>
-                        </li>
-                        <li data-section="students">
-                            <i class="fas fa-users"></i>
-                            <span>👥 الطلاب</span>
-                        </li>
-                        <li data-section="monitoring">
-                            <i class="fas fa-eye"></i>
-                            <span>👁️ المراقبة</span>
-                        </li>
-                        <li data-section="grades">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>📊 العلامات</span>
-                        </li>
-                        <li data-section="analytics">
-                            <i class="fas fa-analytics"></i>
-                            <span>📈 التحليلات</span>
-                        </li>
-                    </ul>
-
-                    <div class="sidebar-footer">
-                        <button id="logout-btn" class="btn btn-danger-outlined">
-                            <i class="fas fa-sign-out-alt"></i> خروج
-                        </button>
-                    </div>
-                </nav>
-
-                <!-- Main Content -->
-                <main class="admin-main">
-                    <section id="dashboard-section" class="admin-section active">
-                        <h2>📊 لوحة المعلومات</h2>
-                        <div id="dashboard-content"></div>
-                    </section>
-
-                    <section id="exams-section" class="admin-section">
-                        <div class="section-header">
-                            <h2>📚 الامتحانات</h2>
-                            <button id="new-exam-btn" class="btn btn-success">
-                                <i class="fas fa-plus"></i> امتحان جديد
-                            </button>
-                        </div>
-                        <div id="exams-content"></div>
-                    </section>
-
-                    <section id="students-section" class="admin-section">
-                        <div class="section-header">
-                            <h2>👥 الطلاب</h2>
-                            <button id="new-student-btn" class="btn btn-success">
-                                <i class="fas fa-user-plus"></i> طالب جديد
-                            </button>
-                        </div>
-                        <div id="students-content"></div>
-                    </section>
-
-                    <section id="monitoring-section" class="admin-section">
-                        <h2>👁️ المراقبة المباشرة</h2>
-                        <div id="monitoring-content"></div>
-                    </section>
-
-                    <section id="grades-section" class="admin-section">
-                        <h2>📊 العلامات والتصحيح</h2>
-                        <div id="grades-content"></div>
-                    </section>
-
-                    <section id="analytics-section" class="admin-section">
-                        <h2>📈 التحليلات والإحصائيات</h2>
-                        <div id="analytics-content"></div>
-                    </section>
-                </main>
             </div>
         </div>
-
-        <!-- ===== STUDENT (existing) ===== -->
-        <div id="student-screen" class="screen">
-            <header class="student-header">
-                <h2>👋 مرحباً، <span id="student-name"></span></h2>
-                <button id="student-logout-btn" class="btn btn-danger-outlined">خروج</button>
-            </header>
-
-            <main class="student-main">
-                <section id="student-dashboard" class="student-section active">
-                    <div id="student-dashboard-content"></div>
-                </section>
-
-                <section id="exam-taker" class="student-section">
-                    <div id="exam-content"></div>
-                </section>
-            </main>
-        </div>
-
-        <!-- ===== RESULTS/ANALYTICS (empty placeholder, ready for future) ===== -->
-        <div id="results-screen" class="screen">
-            <div class="results-container" style="padding:20px;">
-                <h2>📈 التحليلات</h2>
-                <div id="results-content"></div>
-            </div>
-        </div>
-
-        <!-- ===== MODALS ===== -->
-        <div id="modal-overlay" class="modal-overlay">
-            <div id="modal-content" class="modal-box"></div>
-        </div>
-
     </div>
 
-    <!-- Scripts -->
+
+    <!-- ═══════════════════════════════════════
+         ADMIN SCREEN
+    ═══════════════════════════════════════ -->
+    <div id="admin-screen" class="screen" role="main">
+
+        <!-- Mobile Topbar -->
+        <div class="mobile-topbar" role="banner">
+            <button class="menu-toggle" id="menu-toggle-btn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="admin-sidebar">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <span class="mobile-topbar-logo">
+                <i class="fas fa-graduation-cap"></i>
+            </span>
+            <span class="mobile-topbar-title">لوحة التحكم</span>
+        </div>
+
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay" role="presentation" aria-hidden="true"></div>
+
+        <div class="admin-wrapper">
+
+            <!-- ── Sidebar ── -->
+            <nav class="admin-sidebar" id="admin-sidebar" role="navigation" aria-label="القائمة الرئيسية">
+
+                <div class="sidebar-header">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <h2>لوحة التحكم</h2>
+                </div>
+
+                <ul class="sidebar-menu" role="menubar">
+                    <li class="active"
+                        data-section="dashboard"
+                        role="menuitem"
+                        tabindex="0"
+                        aria-current="page"
+                        aria-label="لوحة المعلومات">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        <span>لوحة المعلومات</span>
+                    </li>
+                    <li data-section="exams"
+                        role="menuitem"
+                        tabindex="0"
+                        aria-label="الامتحانات">
+                        <i class="fas fa-file-alt" aria-hidden="true"></i>
+                        <span>الامتحانات</span>
+                    </li>
+                    <li data-section="students"
+                        role="menuitem"
+                        tabindex="0"
+                        aria-label="الطلاب">
+                        <i class="fas fa-users" aria-hidden="true"></i>
+                        <span>الطلاب</span>
+                    </li>
+                    <li data-section="monitoring"
+                        role="menuitem"
+                        tabindex="0"
+                        aria-label="المراقبة">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        <span>المراقبة</span>
+                    </li>
+                    <li data-section="grades"
+                        role="menuitem"
+                        tabindex="0"
+                        aria-label="العلامات">
+                        <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                        <span>العلامات</span>
+                    </li>
+                    <li data-section="analytics"
+                        role="menuitem"
+                        tabindex="0"
+                        aria-label="التحليلات">
+                        <i class="fas fa-chart-pie" aria-hidden="true"></i>
+                        <span>التحليلات</span>
+                    </li>
+                </ul>
+
+                <div class="sidebar-footer">
+                    <button id="logout-btn" class="btn btn-danger-outlined" aria-label="تسجيل الخروج">
+                        <i class="fas fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                        <span>تسجيل الخروج</span>
+                    </button>
+                </div>
+
+            </nav>
+
+            <!-- ── Main Content ── -->
+            <main class="admin-main" id="admin-main" role="main" aria-label="المحتوى الرئيسي">
+
+                <!-- Dashboard -->
+                <section
+                    id="dashboard-section"
+                    class="admin-section active"
+                    role="region"
+                    aria-label="لوحة المعلومات">
+                    <h2>
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        لوحة المعلومات
+                    </h2>
+                    <div id="dashboard-content"></div>
+                </section>
+
+                <!-- Exams -->
+                <section
+                    id="exams-section"
+                    class="admin-section"
+                    role="region"
+                    aria-label="الامتحانات">
+                    <div class="section-header">
+                        <h2>
+                            <i class="fas fa-file-alt" aria-hidden="true"></i>
+                            الامتحانات
+                        </h2>
+                        <button id="new-exam-btn" class="btn btn-success" aria-label="إنشاء امتحان جديد">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            <span>امتحان جديد</span>
+                        </button>
+                    </div>
+                    <div id="exams-content"></div>
+                </section>
+
+                <!-- Students -->
+                <section
+                    id="students-section"
+                    class="admin-section"
+                    role="region"
+                    aria-label="الطلاب">
+                    <div class="section-header">
+                        <h2>
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                            الطلاب
+                        </h2>
+                        <button id="new-student-btn" class="btn btn-success" aria-label="إضافة طالب جديد">
+                            <i class="fas fa-user-plus" aria-hidden="true"></i>
+                            <span>طالب جديد</span>
+                        </button>
+                    </div>
+                    <div id="students-content"></div>
+                </section>
+
+                <!-- Monitoring -->
+                <section
+                    id="monitoring-section"
+                    class="admin-section"
+                    role="region"
+                    aria-label="المراقبة المباشرة">
+                    <h2>
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        المراقبة المباشرة
+                    </h2>
+                    <div id="monitoring-content"></div>
+                </section>
+
+                <!-- Grades -->
+                <section
+                    id="grades-section"
+                    class="admin-section"
+                    role="region"
+                    aria-label="العلامات والتصحيح">
+                    <h2>
+                        <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                        العلامات والتصحيح
+                    </h2>
+                    <div id="grades-content"></div>
+                </section>
+
+                <!-- Analytics -->
+                <section
+                    id="analytics-section"
+                    class="admin-section"
+                    role="region"
+                    aria-label="التحليلات والإحصائيات">
+                    <h2>
+                        <i class="fas fa-chart-pie" aria-hidden="true"></i>
+                        التحليلات والإحصائيات
+                    </h2>
+                    <div id="analytics-content"></div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         STUDENT SCREEN
+    ═══════════════════════════════════════ -->
+    <div id="student-screen" class="screen" role="main">
+
+        <!-- Student Header -->
+        <header class="student-header" role="banner">
+            <h2>
+                <i class="fas fa-hand-wave" aria-hidden="true"></i>
+                مرحباً،&nbsp;<span id="student-name"></span>
+            </h2>
+            <button
+                id="student-logout-btn"
+                class="btn btn-danger-outlined btn-sm"
+                aria-label="تسجيل الخروج">
+                <i class="fas fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                <span>خروج</span>
+            </button>
+        </header>
+
+        <!-- Student Main -->
+        <main class="student-main" role="main">
+
+            <!-- Student Dashboard -->
+            <section
+                id="student-dashboard"
+                class="student-section active"
+                role="region"
+                aria-label="لوحة الطالب">
+                <div id="student-dashboard-content"></div>
+            </section>
+
+            <!-- Exam Taker -->
+            <section
+                id="exam-taker"
+                class="student-section"
+                role="region"
+                aria-label="الامتحان الحالي">
+                <div id="exam-content"></div>
+            </section>
+
+        </main>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         MODAL SYSTEM
+    ═══════════════════════════════════════ -->
+    <div
+        id="modal-overlay"
+        class="modal-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-hidden="true">
+        <div id="modal-content" class="modal-box" tabindex="-1"></div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         SCRIPTS
+    ═══════════════════════════════════════ -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="js/app.js"></script>
 
-    <script>
-        /* Minimal wiring for ExamOS topbar (feature from new.html) */
-        function switchView(v) {
-            const adminScreen = document.getElementById('admin-screen');
-            const studentScreen = document.getElementById('student-screen');
-            const resultsScreen = document.getElementById('results-screen');
-            const topbar = document.getElementById('examos-topbar');
-
-            if (topbar) topbar.style.display = 'flex';
-
-            adminScreen.classList.toggle('active', v === 'teacher');
-            studentScreen.classList.toggle('active', v === 'student');
-            resultsScreen.classList.toggle('active', v === 'results');
-
-            adminScreen.style.display = (v === 'teacher') ? 'block' : 'none';
-            studentScreen.style.display = (v === 'student') ? 'block' : 'none';
-            resultsScreen.style.display = (v === 'results') ? 'block' : 'none';
-
-            document.querySelectorAll('.topbar-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('tab-' + v)?.classList.add('active');
-        }
-    </script>
-
 </body>
 </html>
-
