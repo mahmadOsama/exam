@@ -68,24 +68,35 @@ async function handleLogin(e) {
             return;
         }
 
-        // Check if student in database
-        const { data: student, error } = await supabase
+        // ✅ SECURE: Student login using Supabase Auth (no plaintext password checks)
+        // Email is generated deterministically: `${username}@examplatform.local`
+        const email = `${username}@examplatform.local`;
+
+        // Use Supabase Auth signInWithPassword
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
+
+        if (authError || !authData?.user) {
+            // Keep Arabic error messaging requirement for user-facing UI
+            console.warn('⛔ Login failed -> staying on login-screen', authError);
+            showNotification('❌ اسم المستخدم أو كلمة المرور غير صحيحة', 'error');
+            passwordInput.value = '';
+            return;
+        }
+
+        // Fetch student profile from public.users using auth_user_id
+        const { data: student, error: studentError } = await supabase
             .from('users')
             .select('*')
-            .eq('username', username)
-            .eq('password', password)
+            .eq('auth_user_id', authData.user.id)
             .eq('is_active', true)
             .maybeSingle();
 
-        // Extra debug (Pages-safe) - helps identify the exact failure
-        if (error) {
-            console.error('❌ Login query error:', error);
-        }
-        console.log('🧾 Login query result:', { student, hasError: !!error });
-
-        if (error || !student) {
-            console.warn('⛔ Login failed -> staying on login-screen');
-            showNotification('❌ Invalid username or password', 'error');
+        if (studentError || !student) {
+            console.warn('⛔ Student profile missing or inactive', { studentError });
+            showNotification('❌ الطالب غير موجود أو حسابه غير مفعل', 'error');
             passwordInput.value = '';
             return;
         }

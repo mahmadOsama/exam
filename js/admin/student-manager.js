@@ -131,6 +131,7 @@ async function handleCreateStudent(e) {
         return;
     }
 
+    // Supabase Auth password rules apply, but we keep existing UI validation
     if (password.length < 6) {
         showNotification('⚠️ Password must be at least 6 characters', 'warning');
         return;
@@ -138,13 +139,54 @@ async function handleCreateStudent(e) {
 
     showNotification('⏳ Creating student...', 'info');
 
-    const studentData = {
+    // ✅ SECURE: Use Supabase Auth instead of storing password in plain text
+    // - Email is generated deterministically: `${username}@examplatform.local`
+    // - User metadata is stored in auth.user.user_metadata
+    // - Backward compatibility: we still return/create the student row in `users`
+    //   using a DB trigger that links auth.users to public.users.
+
+    const email = `${username}@examplatform.local`;
+
+    // Import supabase from db.js (already in project global pattern via db.js)
+    // Note: We keep all existing function names / flow.
+    // supabase is provided by db.js
+    const { supabase } = await import('../db.js');
+
+    const { error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+            data: {
+                full_name: fullName,
+                username,
+                role: 'student',
+                is_active: true
+            }
+        }
+    });
+
+    if (authError) {
+        // Arabic error messages (keep UX consistent with existing system)
+        if (authError.message?.includes('already registered')) {
+            showNotification('❌ Username already exists', 'error');
+            return;
+        }
+        showNotification(`❌ Error: ${authError.message}`, 'error');
+        return;
+    }
+
+    // At this point Supabase auth user is created.
+    // The `users` row will be created by trigger/migration.
+    // For compatibility with existing createStudent flow, we attempt to create a row
+    // only if it doesn't exist yet (without passing password).
+    const { error } = await createStudent({
         full_name: fullName,
         username: username,
-        password: password
-    };
-
-    const { error } = await createStudent(studentData);
+        // password is intentionally NOT stored anymore
+        // DB trigger/migration will handle linking with auth_user_id
+        // password column remains untouched to avoid breaking schema.
+        password: undefined
+    });
 
     if (!error) {
         showNotification('✅ Student created successfully!', 'success');
